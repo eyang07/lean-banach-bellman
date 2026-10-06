@@ -86,11 +86,17 @@ write workflows, or create that file through the GitHub website.
 
 ## Authorship and background
 
-The proofs were written by hand by [eyang07](https://github.com/eyang07),
-originally in a working repository for the 2026 Utrecht summerschool on
-formalising mathematics in Lean. This standalone project contains the two
-personal proof files, with module paths and explanatory comments adapted for
-presentation; it does not include the course lectures or exercises.
+All definitions, lemmas, and theorem statements were handwritten by
+[eyang07](https://github.com/eyang07), and all proof strategies were verified
+by hand. AI assistance was limited to small portions of the code involving
+applications of mathlib lemmas to convoluted proof goals that were harder to
+analyze on paper.
+
+The project originated in a working repository for the 2026 Utrecht
+summerschool on formalising mathematics in Lean. This standalone repository
+contains the two personal proof files, with module paths and explanatory
+comments adapted for presentation; it does not include the course lectures
+or exercises.
 
 The project uses mathlib's foundational definitions, finite sums, metric and
 topological results, and tactics. Its contribution is the explicit Banach
