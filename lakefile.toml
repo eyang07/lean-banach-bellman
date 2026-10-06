@@ -1,0 +1,16 @@
+name = "lean-banach-bellman"
+version = "0.1.0"
+keywords = ["math", "fixed-point", "bellman"]
+defaultTargets = ["BanachBellman"]
+
+[leanOptions]
+pp.unicode.fun = true
+autoImplicit = false
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "985d97018f12d5ac61a60f551da15d7a4b1e7ac1"
+
+[[lean_lib]]
+name = "BanachBellman"
