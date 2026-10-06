@@ -88,9 +88,9 @@ write workflows, or create that file through the GitHub website.
 
 All definitions, lemmas, and theorem statements were handwritten by
 [eyang07](https://github.com/eyang07), and all proof strategies were verified
-by hand. AI assistance was limited to small portions of the code involving
-applications of mathlib lemmas to convoluted proof goals that were harder to
-analyze on paper.
+by hand. AI assistance was used in a small portion of the code, primarily
+to reformulate proof goals that were difficult to close into forms the author
+could then complete manually.
 
 The project originated in a working repository for the 2026 Utrecht
 summerschool on formalising mathematics in Lean. This standalone repository
@@ -101,3 +101,10 @@ or exercises.
 The project uses mathlib's foundational definitions, finite sums, metric and
 topological results, and tactics. Its contribution is the explicit Banach
 proof and the Bellman contraction and convergence proofs built on it.
+
+## Skills developed
+
+Through this project, the author developed proficiency in Lean by using
+tactics, structuring proofs into smaller arguments and reusable lemmas,
+working with mathlib lemmas, and using filters to formalize convergence and
+other arguments in analysis.
