@@ -59,6 +59,75 @@ reward function. It does not include optimization over actions. This is the
 discounted Bellman equation for policy evaluation, not the Bellman–Ford
 shortest-path algorithm.
 
+## Architecture
+
+The code is organized as definitions → lemmas/proofs → theorems, with the
+abstract fixed-point method supplying the finite Bellman application:
+
+```text
+BanachBellman.lean                         (imports both proof modules)
+│
+├── BanachBellman/Banach.lean
+│   ├── Structure: contraction f c
+│   │   ├── lipschitz: d(f(x), f(y)) ≤ c · d(x, y)
+│   │   ├── lt_one: c < 1
+│   │   └── nonneg: 0 ≤ c
+│   ├── Lemma: contraction_continuous
+│   ├── Definition: fixed_point_seq f x₀
+│   └── Theorem: banach_fixed_point
+│       ├── Geometric bounds on successive iterates and tails
+│       ├── Cauchy sequence → limit by completeness
+│       ├── Continuity → fixed point
+│       └── Contraction inequality → uniqueness
+│
+└── BanachBellman/FiniteBellman.lean
+    ├── Definition: stochastic_kernel_cond P
+    ├── Definition: bellman_operator P r γ
+    ├── Lemma: bellman_is_contraction
+    ├── Theorem: bellman_eq_uniq_existence_of_solution
+    ├── Theorem: global_conv_of_contraction_dynamics
+    │   └── Geometric error bound for any contraction
+    ├── Definition: bellman_it_seq P r γ V₀
+    └── Theorem: iterate_eval_conv
+        ├── Geometric error bound → distance tends to zero
+        └── Uniqueness of limits
+```
+
+### Proof Dependencies
+
+Arrows point from a prerequisite to the definition or result that uses it.
+The diagram shows dependencies between project declarations; mathlib's
+supporting results are omitted.
+
+```mermaid
+flowchart TD
+    C["contraction"] --> CC["contraction_continuous"]
+    C --> B["banach_fixed_point"]
+    CC --> B
+    F["fixed_point_seq"] --> B
+
+    P["stochastic_kernel_cond"] --> BC["bellman_is_contraction"]
+    T["bellman_operator"] --> BC
+    C --> BC
+    B --> E["bellman_eq_uniq_existence_of_solution"]
+    BC --> E
+
+    B --> G["global_conv_of_contraction_dynamics"]
+    F --> G
+    F --> I["bellman_it_seq"]
+    T --> I
+
+    E --> V["iterate_eval_conv"]
+    G --> V
+    BC --> V
+    I --> V
+```
+
+The fixed-point method branches into existence and uniqueness of the Bellman
+solution and a general geometric error bound. The final convergence proof
+combines these branches, using `γⁿ → 0` to show that the Bellman iterates
+converge to the unique solution.
+
 ## Build and inspect
 
 Install Lean using [elan](https://github.com/leanprover/elan), then run from the
